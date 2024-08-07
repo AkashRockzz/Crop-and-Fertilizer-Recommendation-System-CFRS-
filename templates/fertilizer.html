@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CFRS - Fertilizer Recommendation System</title>
+
+    <!-- Tailwind CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+  </head>
+
+  <body class="bg-gray-100">
+    {% extends "base.html" %} {% block newC %}
+    <!-- Hero Section -->
+    <div
+      class="bg-cover bg-center h-96"
+      style="background-image: url('/static/agri3.jpg')"
+    >
+      <div
+        class="flex items-center justify-center h-full bg-gray-900 bg-opacity-50"
+      >
+        <div class="text-center">
+          <h1 class="text-white text-5xl font-bold">
+            Fertilizer Recommendation System
+          </h1>
+          <p class="text-white text-lg mt-4">
+            Get the best fertilizer recommendations based on soil and crop
+            conditions.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-6 py-12">
+      <h1 class="text-center text-3xl text-green-600 font-bold mb-6">
+        Fertilizer Recommendation System 🌾
+      </h1>
+      <div class="bg-white rounded-lg shadow-lg p-6">
+        <form action="/fertilizer_predict" method="POST">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div>
+              <label
+                for="Temperature"
+                class="block text-gray-700 font-bold mb-2"
+                >Temperature</label
+              >
+              <input
+                type="number"
+                step="0.01"
+                id="Temperature"
+                name="Temperature"
+                placeholder="Enter Temperature in °C"
+                class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
+                required min="3" max="45"
+              />
+            </div>
+            <div>
+              <label for="Humidity" class="block text-gray-700 font-bold mb-2"
+                >Humidity</label
+              >
+              <input
+                type="number"
+                step="0.01"
+                id="Humidity"
+                name="Humidity"
+                placeholder="Enter Humidity in %"
+                class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
+                required min="10" max="100"
+              />
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div>
+              <label for="Moisture" class="block text-gray-700 font-bold mb-2"
+                >Moisture</label
+              >
+              <input
+                type="number"
+                step="0.01"
+                id="Moisture"
+                name="Moisture"
+                placeholder="Enter Moisture in %"
+                class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
+                required 
+              />
+            </div>
+            <div>
+              <label for="Soil_Type" class="block text-gray-700 font-bold mb-2"
+                >Soil Type</label
+              >
+              <select
+                id="Soil_Type"
+                name="Soil_Type"
+                class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
+                required
+              >
+                <option value="" disabled selected>Select Soil Type</option>
+                <option value="Clayey">Clayey</option>
+                <option value="Red">Red</option>
+                <option value="Black">Black</option>
+                <option value="Loamy">Loamy</option>
+                <option value="Sandy">Sandy</option>
+              </select>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div>
+              <label for="Crop_Type" class="block text-gray-700 font-bold mb-2"
+                >Crop Type</label
+              >
+              <select
+                id="Crop_Type"
+                name="Crop_Type"
+                class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
+                required
+              >
+                <option value="" disabled selected>Select Crop Type</option>
+                <option value="Paddy">Paddy</option>
+                <option value="Tobacco">Tobacco</option>
+                <option value="Cotton">Cotton</option>
+                <option value="Sugarcane">Sugarcane</option>
+                <option value="Maize">Maize</option>
+              </select>
+            </div>
+            <div>
+              <label for="Nitrogen" class="block text-gray-700 font-bold mb-2"
+                >Nitrogen</label
+              >
+              <input
+                type="number"
+                id="Nitrogen"
+                name="Nitrogen"
+                placeholder="Enter Nitrogen"
+                class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
+                required min="0" max="140"
+              />
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div>
+              <label for="Potassium" class="block text-gray-700 font-bold mb-2"
+                >Potassium</label
+              >
+              <input
+                type="number"
+                id="Potassium"
+                name="Potassium"
+                placeholder="Enter Potassium"
+                class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
+                required min="5" max="205"
+              />
+            </div>
+            <div>
+              <label
+                for="Phosphorous"
+                class="block text-gray-700 font-bold mb-2"
+                >Phosphorous</label
+              >
+              <input
+                type="number"
+                id="Phosphorous"
+                name="Phosphorous"
+                placeholder="Enter Phosphorous"
+                class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
+                required min="5" max="145"
+              />
+            </div>
+          </div>
+          <div class="text-center">
+            <button
+              type="submit"
+              class="bg-green-600 text-white px-6 py-3 rounded-lg text-lg font-bold"
+            >
+              Get Recommendation
+            </button>
+          </div>
+          {% if result %}
+          <div class="bg-white shadow-md rounded-lg p-6 text-center mt-6">
+            <p class="text-2xl font-semibold text-gray-700">
+              Recommended Fertilizer:
+            </p>
+            <p class="text-2xl font-bold text-green-500">{{ result }}</p>
+          </div>
+          {% endif %}
+        </form>
+      </div>
+    </div>
+    {% endblock %}
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  </body>
+</html>

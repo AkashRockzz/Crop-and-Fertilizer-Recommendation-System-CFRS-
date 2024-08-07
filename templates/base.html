@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <nav class="bg-green-700 shadow-lg">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex justify-between items-center">
+                <a href="/" class="text-white text-2xl font-bold">Crop & Fertilizer Recommendation</a>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    
+                    {% if current_user.is_authenticated %}
+                    <li style="float:right"><a href="/logout">Logout</a></li>
+                    <li><a href="{{ url_for('history') }}">History</a></li>
+                    <li style="float:right"><a href="#">Welcome, {{ current_user.username }}</a></li>
+                    <li style="float:right"><a href="/chat">Ask AI</a></li>
+                    {% else %}
+                    <li><a href="#about">About</a></li>
+                    <li style="float:right"><a href="#" id="signin">Sign In</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+    <div id="newC">
+        {% block newC %}{% endblock %}
+    </div>
+
+    
+
+    <div id="loginModal" class="modal hidden fixed inset-0 flex items-center justify-center z-50">
+        <div class="modal-content bg-white rounded-lg overflow-hidden shadow-md w-96">
+            <span class="close absolute top-0.5 right-1 mt-4 mr-4 cursor-pointer">&times;</span>
+            <div class="tab flex justify-center">
+                <button class="tablinks focus:outline-none px-6 py-3 bg-gray-200 text-gray-700 hover:bg-gray-300"
+                    onclick="openForm(event, 'loginForm')">Log in</button>
+                <button class="tablinks focus:outline-none px-6 py-3 bg-gray-200 text-gray-700 hover:bg-gray-300"
+                    onclick="openForm(event, 'registerForm')">Register</button>
+            </div>
+            <div id="loginForm" class="tabcontent">
+                <h2 class="text-2xl font-bold text-center py-4">Login</h2>
+                <form method="POST" action="/login" class="px-8 pb-8">
+                    <label for="username" class="block mb-2">Username:</label>
+                    <input type="text" id="username" name="username" required
+                        class="block w-full px-3 py-2 border rounded-lg mb-4">
+                    <label for="password" class="block mb-2">Password:</label>
+                    <input type="password" id="password" name="password" required
+                        class="block w-full px-3 py-2 border rounded-lg mb-4">
+                    <button type="submit"
+                        class="w-full bg-green-500 text-white font-bold py-2 px-4 rounded-lg">Login</button>
+                </form>
+            </div>
+            <div id="registerForm" class="tabcontent hidden">
+                <h2 class="text-2xl font-bold text-center py-4">Register</h2>
+                <form method="POST" action="/register" class="px-8 pb-8">
+                    <label for="new_username" class="block mb-2">Username:</label>
+                    <input type="text" id="new_username" name="username" required
+                        class="block w-full px-3 py-2 border rounded-lg mb-4">
+                    <label for="new_password" class="block mb-2">Password:</label>
+                    <input type="password" id="new_password" name="password" required
+                        class="block w-full px-3 py-2 border rounded-lg mb-4">
+                    <button type="submit"
+                        class="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-lg">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>

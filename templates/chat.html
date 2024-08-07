@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with AI</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Custom styles for chat layout */
+        .chat-message {
+            max-width: 70%;
+            margin-bottom: 10px;
+            word-wrap: break-word;
+            padding: 10px; /* Added padding */
+        }
+
+        .user-message {
+            background-color: #DCF8C6;
+            border-radius: 10px 10px 2px 10px;
+            float: right;
+        }
+
+        .ai-message {
+            background-color: #E5E5EA;
+            border-radius: 2px 10px 10px 10px;
+            float: left;
+        }
+
+        .break {
+            clear: both;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden my-16">
+        <div class="py-2 px-4 bg-green-500">
+            <h1 class="text-white text-lg font-semibold">Chat with AI</h1>
+        </div>
+        <div class="chat-container px-4 py-2">
+            <div id="chat-box" class="overflow-y-auto max-h-80"></div>
+            <input type="text" id="user-input" class="w-full mt-2 border border-gray-300 rounded-lg px-4 py-2" placeholder="Type your message...">
+            <button id="send-button" class="w-full bg-green-500 text-white font-semibold rounded-lg py-2 mt-2">Send</button>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // JavaScript code remains the same
+        $(document).ready(function() {
+            // Function to append messages to chat box
+            function appendMessage(sender, message) {
+                var messageClass = sender === 'You' ? 'user-message' : 'ai-message';
+                $('#chat-box').append('<div class="chat-message ' + messageClass + '"><strong>' + sender + ':</strong> ' + message + '</div><div class="break"></div>');
+                // Scroll to bottom of chat box
+                $('#chat-box').scrollTop($('#chat-box')[0].scrollHeight);
+            }
+
+            // Send user message to server and get AI response
+            $('#send-button').click(function() {
+                var userMessage = $('#user-input').val().trim();
+                if (userMessage !== '') {
+                    appendMessage('You', userMessage);
+                    $('#user-input').val('');
+                    $.ajax({
+                        url: '/api/chatbot',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({message: userMessage}),
+                        success: function(data) {
+                            appendMessage('AI', data.reply);
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('Error:', error);
+                        }
+                    });
+                }
+            });
+
+            // Allow sending message by pressing Enter key
+            $('#user-input').keypress(function(event) {
+                if (event.which == 13) {
+                    event.preventDefault();
+                    $('#send-button').click();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

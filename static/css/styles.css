@@ -1,0 +1,135 @@
+/* Styles for the close button */
+nav {
+    background-color: #333;
+    overflow: hidden;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    float: left;
+}
+
+nav ul li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+nav ul li a:hover {
+    background-color: #111;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+}
+
+.modal-content {
+    position: relative;
+    background-color: white;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    width: 24rem; /* Adjust as needed */
+    padding-top: 2rem; /* Add some padding at the top if needed */
+}
+
+.close {
+    position: absolute;
+    top: 1rem; /* Adjust this value to move the close button higher */
+    right: 1rem; /* Adjust as needed */
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 100; /* Ensure it is above other elements in the modal */
+    transform: translateY(-50%); /* Fine-tune the vertical position */
+}
+
+
+/* Styles for the tabs */
+.tab {
+    border-bottom: 1px solid #ccc;
+}
+
+.tablinks {
+    background-color: inherit;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.tabcontent {
+    padding: 20px;
+}
+
+/* Hide all tabcontent elements by default */
+.tabcontent {
+    display: none;
+}
+
+/* Style the tab content */
+.tabcontent {
+    animation: slideEffect 0.5s;
+}
+
+@keyframes slideEffect {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* Sliding cards in crop page */
+
+.carousel {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    margin: auto;
+    max-width: 600px;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-slide {
+    min-width: 100%;
+    box-sizing: border-box;
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.carousel-button.prev {
+    left: 10px;
+}
+
+.carousel-button.next {
+    right: 10px;
+}

@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CFRS - Crop and Fertilizer Recommendation System</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/chatbot.css') }}"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+    {% extends "base.html" %}
+    <!-- Navbar -->
+
+
+    <!-- Hero Section -->
+
+    <div class="bg-cover bg-center h-96" style="background-image: url('/static/agri3.jpg');">
+        <div class="flex items-center justify-center h-full bg-gray-900 bg-opacity-50">
+            <div class="text-center">
+                <h1 class="text-white text-5xl font-bold">Crop and Fertilizer Recommendation System</h1>
+                <p class="text-white text-lg mt-4">Get the best recommendations for your crops and fertilizers based on
+                    climatic and soil conditions.</p>
+            </div>
+        </div>
+    </div>
+    {% block content %}
+
+
+    {% if current_user.is_authenticated %}
+    <!-- Main Content -->
+    <div class="container mx-auto px-6 py-12">
+        <div class="flex flex-wrap -mx-6">
+            <div class="w-full md:w-1/2 px-6 mb-12 md:mb-0">
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <img class="w-full h-48 object-cover" src="static/crop_front.png" alt="Crop Recommendation">
+                    <div class="p-6">
+                        <h2 class="text-2xl font-bold mb-2">Crop Recommendation</h2>
+                        <p class="text-gray-700 mb-4">Get the best crop recommendations based on your specific soil and
+                            climate conditions.</p>
+                        <a href="/crop" class="bg-green-600 text-white px-4 py-2 rounded-lg">View Recommendations</a>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 px-6">
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <img class="w-full h-48 object-cover" src="static/fert_front.jpg" alt="Fertilizer Recommendation">
+                    <div class="p-6">
+                        <h2 class="text-2xl font-bold mb-2">Fertilizer Recommendation</h2>
+                        <p class="text-gray-700 mb-4">Find out which fertilizers are best suited for your crops and soil
+                            to maximize yield.</p>
+                        <a href="/fertilizer" class="bg-green-600 text-white px-4 py-2 rounded-lg">View
+                            Recommendations</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    {% else %}
+
+    <div class="bg-cover bg-center h-96" style="background-image: url('/static/agri3.jpg');">
+        <div class="flex items-center justify-center h-full bg-gray-900 bg-opacity-50">
+            <div class="text-center">
+                <h1 class="text-white text-5xl font-bold">Crop and Fertilizer Recommendation System</h1>
+                <p class="text-white text-lg mt-4">Get the best recommendations for your crops and fertilizers based on
+                    climatic and soil conditions.</p>
+            </div>
+        </div>
+    </div>
+
+    
+        <!-- <div class="container mx-auto px-6 py-8">
+            <div class="bg-gray-200 bg-opacity-80 rounded-lg shadow-lg p-6">
+                <h2 class="text-2xl font-bold mb-4 text-center">Crops</h2>
+                <ul class="grid grid-cols-6 gap-4 list-disc list-inside">
+                    <li class="flex items-center justify-center h-8 bg-green-600 text-white rounded-lg">Rice</li>
+                    <li class="flex items-center justify-center h-8 bg-green-600 text-white rounded-lg">Maize</li>
+                    <li class="flex items-center justify-center h-8 bg-green-600 text-white rounded-lg">Jute</li>
+                    <li class="flex items-center justify-center h-8 bg-green-600 text-white rounded-lg">Cotton</li>
+                    <li class="flex items-center justify-center h-8 bg-green-600 text-white rounded-lg">Coconut</li>
+                    <li class="flex items-center justify-center h-8 bg-green-600 text-white rounded-lg">Papaya</li>
+                    <li class="flex items-center justify-center h-8 bg-green-600 text-white rounded-lg">Orange</li>
+                    <li class="flex items-center justify-center h-8 bg-green-600 text-white rounded-lg">Apple</li>
+                    <li class="flex items-center justify-center h-8 bg-green-600 text-white rounded-lg">Muskmelon</li>
+                    <li class="flex items-center justify-center h-8 bg-green-600 text-white rounded-lg">Watermelon</li>
+                    <li class="flex items-center justify-center h-8 bg-green-600 text-white rounded-lg">Grapes</li>
+                    <li class="flex items-center justify-center h-8 bg-green-600 text-white rounded-lg">Mango</li>
+                    <li class="flex items-center justify-center h-8 bg-green-600 text-white rounded-lg">Banana</li>
+                    <li class="flex items-center justify-center h-8 bg-green-600 text-white rounded-lg">Pomegranate</li>
+                    <li class="flex items-center justify-center h-8 bg-green-600 text-white rounded-lg">Lentil</li>
+                    <li class="flex items-center justify-center h-8 bg-green-600 text-white rounded-lg">Blackgram</li>
+                    <li class="flex items-center justify-center h-8 bg-green-600 text-white rounded-lg">Mungbean</li>
+                    <li class="flex items-center justify-center h-8 bg-green-600 text-white rounded-lg">Mothbeans</li>
+                    <li class="flex items-center justify-center h-8 bg-green-600 text-white rounded-lg">Pigeonpeas</li>
+                    <li class="flex items-center justify-center h-8 bg-green-600 text-white rounded-lg">Kidneybeans</li>
+                    <li class="flex items-center justify-center h-8 bg-green-600 text-white rounded-lg">Chickpea</li>
+                    <li class="flex items-center justify-center h-8 bg-green-600 text-white rounded-lg">Coffee</li>
+                </ul>
+            </div>
+        </div> -->
+
+
+        <section id="about" class="container mx-auto px-6 py-12">
+            <div class="max-w-6xl mx-auto px-6 py-12">
+                <div class="bg-white rounded-lg shadow-lg p-12">
+                    <h2 class="text-4xl font-bold mb-4 text-center text-gray-900 px-4">About CFRS</h2>
+                    <p class="text-gray-700 leading-relaxed font-semibold text-lg">
+                        At CFRS, we are dedicated to transforming agriculture through the power of technology. Our Crop and Fertilizer Recommendation System leverages advanced data analysis and machine learning to provide farmers with personalized, data-driven recommendations tailored to their specific soil and climatic conditions. Our goal is to empower farmers to make informed decisions that enhance crop yields, improve soil health, and promote sustainable farming practices. By bridging the gap between cutting-edge technology and traditional agriculture, we aim to contribute to global food security and support the well-being of farming communities around the world. Our team of experts is committed to continuous innovation, ensuring that our solutions remain at the forefront of agricultural advancements. Join us in our journey to create a more efficient, sustainable, and productive agricultural future.
+                    </p>
+                </div>
+            </div>
+        
+            <!-- Contact Us Section -->
+            <div class="max-w-6xl mx-auto px-6 py-12">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h2 class="text-3xl font-bold mb-4 text-center text-gray-900">Contact Us</h2>
+                    <p class="text-gray-700 leading-relaxed text-lg text-center">
+                        We would love to hear from you! Whether you have questions about our system, need support, or want to provide feedback, please feel free to reach out.
+                    </p>
+                    <div class="mt-6 flex justify-center">
+                        <form class="w-full max-w-lg">
+                            <div class="flex flex-wrap -mx-3 mb-6">
+                                <div class="w-full px-3 mb-6">
+                                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-name">
+                                        Name
+                                    </label>
+                                    <input class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-name" type="text" placeholder="Your Name">
+                                </div>
+                                <div class="w-full px-3 mb-6">
+                                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-email">
+                                        Email
+                                    </label>
+                                    <input class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-email" type="email" placeholder="Your Email">
+                                </div>
+                                <div class="w-full px-3 mb-6">
+                                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-message">
+                                        Message
+                                    </label>
+                                    <textarea class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-message" rows="5" placeholder="Your Message"></textarea>
+                                </div>
+                                <div class="w-full px-3">
+                                    <button class="bg-green-700 text-white py-2 px-4 rounded-lg w-full hover:bg-green-600 focus:outline-none focus:bg-green-600" type="submit">Send Message</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    
+
+    <footer class="bg-gray-800 text-white py-6 mt-12">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 CFRS - Crop and Fertilizer Recommendation System. All rights reserved.</p>
+        </div>
+    </footer>
+    {% endif %}
+    {% endblock %}
+
+    <script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
+</body>
+
+</html>
